@@ -40,7 +40,7 @@ async function makeHome() {
   if (club) { club.pause(false); club.reset(); introEnds(1300); return; }
   try {
     await Promise.race([document.fonts.load('40px Anton'), new Promise(r => setTimeout(r, 1200))]);
-    const m = await import('./city.js?v=7');
+    const m = await import('./city.js?v=8');
     club = m.startCity($('#city'), { reduced: reduced(), header: $('#homeTitle'), onStart: skipped => introEnds(reduced() || skipped ? 0 : 5300) });
   } catch (e) { console.error(e); introEnds(0); }
 }
