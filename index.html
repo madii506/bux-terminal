@@ -20,8 +20,8 @@
 <meta name="twitter:image" content="https://bux-terminal.vercel.app/og.png?v=3">
 <link rel="preload" href="/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/anton.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="modulepreload" href="/city.js?v=2">
-<link rel="stylesheet" href="/app.css?v=3">
+<link rel="modulepreload" href="/city.js?v=4">
+<link rel="stylesheet" href="/app.css?v=4">
 </head>
 <body>
 <!-- home: the vault, two buttons, nothing else -->
@@ -29,11 +29,13 @@
   <canvas id="city" aria-hidden="true"></canvas>
   <div class="home-center">
   <h1 class="home-title" id="homeTitle" data-text="BUX">BUX<span aria-hidden="true">BUX</span></h1>
+  <p class="home-sub" id="homeSub"><i></i><span>The First In-Game Currency for GTA</span><i></i></p>
   <div class="home-cta">
-    <button class="hb hb-main" id="enterBtn" type="button">Enter terminal</button>
+    <button class="hb hb-main" id="enterBtn" type="button">Get your BUX</button>
     <button class="hb hb-ghost" id="homeConnect" type="button"><i class="dot"></i><span>Connect wallet</span></button>
   </div>
   </div>
+  <div class="home-bars" aria-hidden="true"><i></i><i></i></div>
 </div>
 <div class="flash" id="flash" aria-hidden="true"></div>
 
@@ -306,6 +308,6 @@
 <div class="pal" id="pal" hidden><div class="pal-in" role="dialog" aria-modal="true" aria-label="Search and commands"><label class="pal-q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><input id="palQ" type="text" placeholder="Search a coin, or type a command" autocomplete="off" spellcheck="false"><span class="kbd">esc</span></label><div class="pal-list" id="palList"></div></div></div>
 <div class="toasts" id="toasts" aria-live="polite"></div>
 <button class="fs-x mono" id="fsX" type="button">Exit full screen <span class="kbd">Esc</span></button>
-<script type="module" src="/main.js?v=4"></script>
+<script type="module" src="/main.js?v=6"></script>
 </body>
 </html>

@@ -40,9 +40,9 @@ async function makeHome() {
   if (club) { club.pause(false); club.reset(); introEnds(1300); return; }
   try {
     await Promise.race([document.fonts.load('40px Anton'), new Promise(r => setTimeout(r, 1200))]);
-    const m = await import('./city.js?v=2');
+    const m = await import('./city.js?v=4');
     club = m.startCity($('#city'), { reduced: reduced(), header: $('#homeTitle') });
-    introEnds(reduced() ? 0 : 4700);
+    introEnds(reduced() ? 0 : 5300);
   } catch (e) { console.error(e); introEnds(0); }
 }
 // the intro plays once: the camera comes down out of the sky into its circle round downtown; any tap skips it
@@ -58,7 +58,7 @@ async function enter() {
   try { if (club && !reduced()) await club.enter(); } catch {}
   const f = $('#flash'); f.classList.add('on');
   setTimeout(() => {
-    html.classList.add('flashing'); html.classList.remove('home', 'opening'); boot(); go(page || startPage(), { push: true });
+    html.classList.add('flashing'); html.classList.remove('home', 'opening'); boot(); go(CONFIG.ca && !page ? 'trade' : page || startPage(), { push: true });
     setTimeout(() => html.classList.remove('flashing'), 900);
     if (club) club.pause(true);
     setTimeout(() => f.classList.remove('on'), 60);
