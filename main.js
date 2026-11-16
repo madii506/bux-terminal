@@ -40,9 +40,8 @@ async function makeHome() {
   if (club) { club.pause(false); club.reset(); introEnds(1300); return; }
   try {
     await Promise.race([document.fonts.load('40px Anton'), new Promise(r => setTimeout(r, 1200))]);
-    const m = await import('./city.js?v=4');
-    club = m.startCity($('#city'), { reduced: reduced(), header: $('#homeTitle') });
-    introEnds(reduced() ? 0 : 5300);
+    const m = await import('./city.js?v=5');
+    club = m.startCity($('#city'), { reduced: reduced(), header: $('#homeTitle'), onStart: skipped => introEnds(reduced() || skipped ? 0 : 5300) });
   } catch (e) { console.error(e); introEnds(0); }
 }
 // the intro plays once: the camera comes down out of the sky into its circle round downtown; any tap skips it
