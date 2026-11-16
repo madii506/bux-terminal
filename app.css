@@ -676,18 +676,25 @@ body{background:var(--bg)}
 button{font:inherit;color:inherit}
 .eyebrow{color:var(--pk);letter-spacing:.08em;text-transform:uppercase;font-size:11.5px;margin-bottom:10px}
 
-/* home: the vault and two buttons, nothing else */
+/* home: the club skyline, the BUX header and two buttons */
 html.home,html.home body{overflow:hidden;height:100%}
-#home{position:fixed;inset:0;z-index:40;background:#05031a;transition:opacity .6s ease,visibility 0s .6s}
+html.home{scrollbar-gutter:auto}
+#home{position:fixed;inset:0;z-index:40;background:#05030c;transition:opacity .6s ease,visibility 0s .6s}
 html:not(.home) #home{opacity:0;visibility:hidden;pointer-events:none}
 html.flashing #home{transition:none}
-#world,#hero{position:absolute;inset:0;width:100%;height:100%;display:block}
-#world{z-index:1}#hero{z-index:2;touch-action:manipulation}
+#city{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1;touch-action:manipulation}
 html.opening .home-cta{opacity:0}
-.home-ph{position:absolute;left:50%;top:40%;width:min(54vh,82vw);aspect-ratio:1;transform:translate(-50%,-50%);z-index:2;display:grid;place-items:center;transition:opacity .8s ease;pointer-events:none}
-.home-ph i{width:100%;height:100%;border-radius:50%;border:2px solid rgba(255,42,143,.55);box-shadow:inset 0 0 0 10px rgba(255,255,255,.04);animation:phr 1.6s ease-in-out infinite}
-.home-ph.gone{opacity:0}
-@keyframes phr{50%{transform:scale(.97);border-color:rgba(63,216,255,.55)}}
+.home-title{--k:0;--c1:#ff2a8f;--c2:#3fd8ff;position:absolute;left:50%;top:clamp(26px,7.5vh,86px);z-index:2;margin:0;transform:translateX(-50%) skewX(-9deg);font:400 clamp(92px,15.5vw,224px)/.86 var(--head);letter-spacing:.015em;color:#c4157b;pointer-events:none;user-select:none;white-space:nowrap;opacity:0;
+  text-shadow:1px 1px 0 #b8126f,2px 2px 0 #b8126f,3px 3px 0 #a90f66,4px 4px 0 #a90f66,5px 5px 0 #960c5b,6px 6px 0 #960c5b,7px 7px 0 #7d0a4c,8px 8px 0 #2a0420,12px 14px 22px rgba(0,0,0,.55)}
+.home-title span{position:absolute;inset:0;color:transparent;text-shadow:none;
+  background:linear-gradient(105deg,transparent 42%,rgba(255,255,255,.95) 50%,transparent 58%) 160% 0/320% 100% no-repeat,linear-gradient(180deg,#fff 0%,#ffe4f4 41%,#2b0b6f 49.5%,#3a1690 52%,#8eeaff 61%,#fff 100%);-webkit-background-clip:text;background-clip:text}
+.home-title::after{content:attr(data-text);position:absolute;inset:0;z-index:-1;color:transparent;text-shadow:0 0 26px var(--c1),0 0 64px var(--c2);opacity:calc(.22 + var(--k) * .55)}
+html.home .home-title.lit{animation:titleOn .9s steps(1,end) both}
+@keyframes titleOn{0%{opacity:0}8%{opacity:.85}14%{opacity:.1}22%{opacity:1}30%{opacity:.35}38%,100%{opacity:1}}
+@keyframes shine{0%{background-position:160% 0,0 0}45%,100%{background-position:-60% 0,0 0}}
+html.home .home-title.lit span{animation:shine 4.8s cubic-bezier(.6,0,.3,1) 1s infinite}
+html.opening .home-title{opacity:0!important;transition:opacity .35s ease}
+@media (max-width:620px){.home-title{top:clamp(40px,9vh,90px);font-size:clamp(88px,30vw,150px)}}
 .home-cta{position:absolute;left:0;right:0;bottom:max(13vh,calc(34px + env(safe-area-inset-bottom)));z-index:3;display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:0 20px;opacity:0;transform:translateY(16px);pointer-events:none;transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
 html.intro-done .home-cta{opacity:1;transform:none;pointer-events:auto}
 @keyframes ctain{from{opacity:0;transform:translateY(16px)}}
@@ -798,7 +805,7 @@ html.fs .tape{display:none}
 .beats li.on b{color:var(--ink)}
 .calc{background:var(--p1)}
 @media (max-width:980px){.hedge{grid-template-columns:1fr}.hchart{height:320px}}
-@media (prefers-reduced-motion:reduce){.page.enter,.card,.tl.pop,.home-cta{animation:none}.home-ph i{animation:none}}
+@media (prefers-reduced-motion:reduce){.page.enter,.card,.tl.pop,.home-cta{animation:none}html.home .home-title.lit{animation:none;opacity:1}}
 /* no backdrop blur on big surfaces: it costs every frame on weaker GPUs; near-opaque fills read the same */
 .pal,.modal{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(5,3,20,.8)}
 #nav,#nav.solid{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(10,7,32,.94)}

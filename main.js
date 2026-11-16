@@ -1,4 +1,4 @@
-// BUX · boot: the home (a night city and the B: enter or connect), the page router, the wallet modal, the palette, live data
+// BUX · boot: the home (the club skyline under the BUX header: enter or connect), the page router, the wallet modal, the palette, live data
 import { $, $$, on, esc, store, short, toast, CONFIG, copy, px, usd, icon, brand, reduced } from './core.js';
 import * as api from './api.js';
 import * as W from './wallet.js';
@@ -33,36 +33,34 @@ document.addEventListener('click', e => {
 });
 addEventListener('hashchange', () => { const p = location.hash.slice(1); if ((PAGES.includes(p) || p === 'market') && !html.classList.contains('home')) go(p, { push: false }); });
 
-// ---------------------------------------------------------------- home: the night city and the B
-let world = null, hero = null, entering = false, booted = false;
+// ---------------------------------------------------------------- home: the club skyline
+let club = null, entering = false, booted = false;
 const startPage = () => { const h = location.hash.slice(1); return PAGES.includes(h) ? h : new URLSearchParams(location.search).has('t') ? 'trade' : 'overview'; };
 async function makeHome() {
-  if (world) { world.reset(); world.pause(false); if (hero) hero.reset(); introEnds(1300); return; }
+  if (club) { club.pause(false); club.reset(); introEnds(1300); return; }
   try {
-    await Promise.race([Promise.all(['700 20px Inter', '800 20px Inter', '40px Anton'].map(f => document.fonts.load(f))), new Promise(r => setTimeout(r, 1500))]);
-    const [w, h] = await Promise.all([import('./world.js?v=1'), import('./hero.js?v=1')]);
-    world = w.startWorld($('#world'), { reduced: reduced() });
-    try { hero = h.startHero($('#hero'), { reduced: reduced() }); } catch (e) { console.error(e); }
-    introEnds(reduced() ? 0 : 3700);
-  } catch (e) { console.error(e); }
+    await Promise.race([document.fonts.load('40px Anton'), new Promise(r => setTimeout(r, 1200))]);
+    const m = await import('./club.js?v=1');
+    club = m.startClub($('#city'), { reduced: reduced(), header: $('#homeTitle') });
+    introEnds(reduced() ? 0 : 4300);
+  } catch (e) { console.error(e); introEnds(0); }
 }
-// the intro plays once: the camera comes down from the stars, the city wakes, the B drops in; any tap skips to the end
+// the intro plays once: the city powers up, the beams switch on, the beat drops on the header; any tap skips to the drop
 let introT = 0;
 function introEnds(ms) { clearTimeout(introT); html.classList.remove('intro-done'); introT = setTimeout(() => html.classList.add('intro-done'), ms); }
-function skipIntro() { if (html.classList.contains('intro-done') || !html.classList.contains('home')) return; if (world && world.skip) world.skip(); if (hero && hero.skip) hero.skip(); clearTimeout(introT); setTimeout(() => html.classList.add('intro-done'), 600); }
+function skipIntro() { if (html.classList.contains('intro-done') || !html.classList.contains('home')) return; if (club) club.skip(); clearTimeout(introT); setTimeout(() => html.classList.add('intro-done'), 600); }
 $('#home').addEventListener('pointerdown', e => { if (!e.target.closest('.home-cta')) skipIntro(); });
 addEventListener('keydown', e => { if (e.key === 'Escape' || e.key === ' ') skipIntro(); });
 async function enter() {
   if (entering || !html.classList.contains('home')) return;
   entering = true; $('#enterBtn').disabled = true;
   html.classList.add('opening');
-  if (world) world.dive();
-  try { if (hero && !reduced()) await hero.enter(); } catch {}
+  try { if (club && !reduced()) await club.enter(); } catch {}
   const f = $('#flash'); f.classList.add('on');
   setTimeout(() => {
     html.classList.add('flashing'); html.classList.remove('home', 'opening'); boot(); go(page || startPage(), { push: true });
     setTimeout(() => html.classList.remove('flashing'), 900);
-    if (world) world.pause(true); if (hero) hero.pause(true);
+    if (club) club.pause(true);
     setTimeout(() => f.classList.remove('on'), 60);
     entering = false; $('#enterBtn').disabled = false;
   }, reduced() ? 0 : 240);
@@ -176,7 +174,7 @@ const ACTIONS = [
   ['Settings', ',', 'slippage, leverage, start screen', tools.settings],
   ['Keyboard shortcuts', '?', 'every key the terminal knows', () => T.openKeys()],
   ...(CONFIG.ca ? [['Copy the $BUX CA', '$', short(CONFIG.ca), () => copy(CONFIG.ca)], ['Buy $BUX on pump.fun', '↗', 'opens pump.fun', () => window.open('https://pump.fun/coin/' + CONFIG.ca, '_blank', 'noopener')]] : []),
-  ['Home screen', '◎', 'the city and the B', () => home()],
+  ['Home screen', '◎', 'the club skyline', () => home()],
   ['FAQ', '?', 'questions players ask', () => go('faq')],
 ];
 let palSel = 0, palItems = [], palSeq = 0;
@@ -192,7 +190,7 @@ function drawPal(coins) {
   hlPal();
 }
 function hlPal() { $$('#palList button').forEach(b => b.classList.toggle('hl', +b.dataset.i === palSel)); }
-function runPal(i) { const it = palItems[i]; if (!it) return; closePalette(); if (html.classList.contains('home')) { html.classList.remove('home'); boot(); if (world) world.pause(true); if (hero) hero.pause(true); } if (it.coin) { go('trade'); window.__buxPick && window.__buxPick(it.coin.mint, 'ape'); } else it.act[3](); }
+function runPal(i) { const it = palItems[i]; if (!it) return; closePalette(); if (html.classList.contains('home')) { html.classList.remove('home'); boot(); if (club) club.pause(true); } if (it.coin) { go('trade'); window.__buxPick && window.__buxPick(it.coin.mint, 'ape'); } else it.act[3](); }
 $('#palQ').addEventListener('input', () => {
   drawPal([]); const v = $('#palQ').value.trim(); if (v.length < 2) return;
   const my = ++palSeq; setTimeout(async () => { if (my !== palSeq) return; try { const r = (await api.search(v)).slice(0, 6); if (my === palSeq) drawPal(r); } catch {} }, 250);

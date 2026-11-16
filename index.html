@@ -13,22 +13,21 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="BUX">
 <meta property="og:description" content="The First In-Game Currency for GTA. Trade memes in-game, hedge your bags, and more.">
-<meta property="og:image" content="https://bux-terminal.vercel.app/og.png?v=1">
+<meta property="og:image" content="https://bux-terminal.vercel.app/og.png?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="BUX">
 <meta name="twitter:description" content="The First In-Game Currency for GTA. Trade memes in-game, hedge your bags, and more.">
-<meta name="twitter:image" content="https://bux-terminal.vercel.app/og.png?v=1">
+<meta name="twitter:image" content="https://bux-terminal.vercel.app/og.png?v=2">
 <link rel="preload" href="/inter.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/anton.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="modulepreload" href="/hero.js?v=1">
-<link rel="modulepreload" href="/world.js?v=1">
-<link rel="stylesheet" href="/app.css?v=1">
+<link rel="modulepreload" href="/club.js?v=1">
+<link rel="stylesheet" href="/app.css?v=2">
 </head>
 <body>
 <!-- home: the vault, two buttons, nothing else -->
 <div id="home">
-  <canvas id="world" aria-hidden="true"></canvas>
-  <canvas id="hero" aria-label="BUX"></canvas>
+  <canvas id="city" aria-hidden="true"></canvas>
+  <h1 class="home-title" id="homeTitle" data-text="BUX">BUX<span aria-hidden="true">BUX</span></h1>
   <div class="home-cta">
     <button class="hb hb-main" id="enterBtn" type="button">Enter terminal</button>
     <button class="hb hb-ghost" id="homeConnect" type="button"><i class="dot"></i><span>Connect wallet</span></button>
@@ -305,6 +304,6 @@
 <div class="pal" id="pal" hidden><div class="pal-in" role="dialog" aria-modal="true" aria-label="Search and commands"><label class="pal-q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><input id="palQ" type="text" placeholder="Search a coin, or type a command" autocomplete="off" spellcheck="false"><span class="kbd">esc</span></label><div class="pal-list" id="palList"></div></div></div>
 <div class="toasts" id="toasts" aria-live="polite"></div>
 <button class="fs-x mono" id="fsX" type="button">Exit full screen <span class="kbd">Esc</span></button>
-<script type="module" src="/main.js?v=1"></script>
+<script type="module" src="/main.js?v=2"></script>
 </body>
 </html>
