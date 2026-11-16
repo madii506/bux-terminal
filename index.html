@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en" class="home">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BUX</title>
+<meta name="description" content="The First In-Game Currency for GTA. Trade memes in-game, hedge your bags with perps, and more. The only GTA money you don't have to steal.">
+<meta name="theme-color" content="#0a0720">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=1">
+<link rel="icon" type="image/png" sizes="64x64" href="/favicon-64.png?v=1">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=1">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BUX">
+<meta property="og:description" content="The First In-Game Currency for GTA. Trade memes in-game, hedge your bags, and more.">
+<meta property="og:image" content="__ORIGIN__/og.png?v=1">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BUX">
+<meta name="twitter:description" content="The First In-Game Currency for GTA. Trade memes in-game, hedge your bags, and more.">
+<meta name="twitter:image" content="__ORIGIN__/og.png?v=1">
+<link rel="preload" href="/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/anton.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="modulepreload" href="/hero.js?v=1">
+<link rel="modulepreload" href="/world.js?v=1">
+<link rel="stylesheet" href="/app.css?v=1">
+</head>
+<body>
+<!-- home: the vault, two buttons, nothing else -->
+<div id="home">
+  <canvas id="world" aria-hidden="true"></canvas>
+  <canvas id="hero" aria-label="BUX"></canvas>
+  <div class="home-cta">
+    <button class="hb hb-main" id="enterBtn" type="button">Enter terminal</button>
+    <button class="hb hb-ghost" id="homeConnect" type="button"><i class="dot"></i><span>Connect wallet</span></button>
+  </div>
+</div>
+<div class="flash" id="flash" aria-hidden="true"></div>
+
+<!-- the terminal site -->
+<div id="app">
+<aside id="rail" aria-label="Sections">
+  <button class="rail-brand" id="homeBtn" type="button" title="Back to the home screen"><img src="/favicon-64.png?v=1" alt="BUX" width="34" height="34"></button>
+  <nav class="rail-nav" id="links"><a href="#overview" data-go="overview" class="on"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg><span>Overview</span></a><a href="#trade" data-go="trade"><svg viewBox="0 0 24 24"><path d="M7 3v4M7 17v4M17 6v3M17 15v4"/><rect x="4.5" y="7" width="5" height="10" rx="1.2"/><rect x="14.5" y="9" width="5" height="6" rx="1.2"/></svg><span>Trade</span></a><a href="#pump" data-go="pump"><svg viewBox="0 0 24 24"><path d="M13.2 2.5 5 13.6h5.6l-1 7.9 8.4-11.3h-5.7z"/></svg><span>Pump</span></a><a href="#trending" data-go="trending"><svg viewBox="0 0 24 24"><path d="M3.5 17 9.5 11l4 4L20.5 8"/><path d="M15 8h5.5v5.5"/></svg><span>Trending</span></a><a href="#perps" data-go="perps"><svg viewBox="0 0 24 24"><path d="M7 20V5M3.5 8.5 7 5l3.5 3.5M17 4v15M13.5 15.5 17 19l3.5-3.5"/></svg><span>Perps</span></a><a href="#whales" data-go="whales"><svg viewBox="0 0 24 24"><path d="M3 13c0 4 3.5 6 8 6 6 0 9.5-3.5 9.5-8.5 0-1.7-.6-3-1.5-3.8M3 13c2.3 0 3.5-1 4.5-2.5M3 13c.3-2.3 1.8-4.5 4.5-5.5"/><path d="M19 6.7 21.5 4M19 6.7 17 4.2"/><circle cx="8.5" cy="14" r=".9"/></svg><span>Whales</span></a><a href="#hedge" data-go="hedge"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v5.5c0 4.6 3.1 8 7.5 9.5 4.4-1.5 7.5-4.9 7.5-9.5V6z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg><span>Hedge</span></a><a href="#bag" data-go="bag"><svg viewBox="0 0 24 24"><rect x="3.5" y="6.5" width="17" height="13" rx="3"/><path d="M8.5 6.5V5.5a3.5 3.5 0 0 1 7 0v1M15.5 13h2"/></svg><span>Bag</span></a><a href="#faq" data-go="faq"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.7 9.4a2.4 2.4 0 1 1 3.2 2.3c-.6.3-.9.8-.9 1.4v.6M12 16.6v.4"/></svg><span>FAQ</span></a></nav>
+</aside>
+<header id="nav">
+  <button class="nav-search" id="navK" type="button" aria-label="Search and commands"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><span>Search coins, perps, wallets and commands</span><span class="kbd">⌘K</span></button>
+  <b class="nav-title" id="navTitle">Overview</b>
+  <div class="nav-r">
+    <span class="nav-gta mono" id="navGta" title="GTA VI release day"><i></i>GTA VI <b>—</b></span>
+    <button class="nav-sol mono" id="navSol" type="button" title="SOL perp on Hyperliquid, live"><i></i>SOL <b>—</b></button>
+    <button class="nav-fund mono" id="navFund" type="button" title="Hyperliquid pays funding every hour, on the hour"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 1.5M9.5 3h5"/></svg><span>funding</span><b>—</b></button>
+    <div class="nav-tools">
+      
+      <button class="nb" id="navAlerts" type="button" title="Price alerts" aria-label="Price alerts"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><em class="badge" id="alertN" hidden>0</em></button>
+      <button class="nb" id="navShare" type="button" title="Copy a link to this coin" aria-label="Share this coin"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.6 0l3-3a4 4 0 0 0-5.6-5.6l-1 1"/><path d="M14 10a4 4 0 0 0-5.6 0l-3 3a4 4 0 0 0 5.6 5.6l1-1"/></svg></button>
+      <button class="nb" id="navFull" type="button" title="Full screen (F)" aria-label="Full screen"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></svg></button>
+      <button class="nb" id="navKeys" type="button" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2.5"/><path d="M7 10h1M11 10h1M15 10h2M7 14h10"/></svg></button>
+      <button class="nb" id="navSet" type="button" title="Settings" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2.8v2.4M12 18.8v2.4M4.2 7.5l2.1 1.2M17.7 15.3l2.1 1.2M4.2 16.5l2.1-1.2M17.7 8.7l2.1-1.2"/></svg></button>
+    </div>
+    <a class="nav-x" id="navX" href="#" target="_blank" rel="noopener" hidden aria-label="X">𝕏</a>
+    <button class="btn btn-ghost btn-sm" id="connectBtn" type="button"><i class="dot"></i><span>Connect</span></button>
+    <button class="menu-btn" id="menuBtn" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+  </div>
+</header>
+<div id="mSheet" hidden><a href="#overview" data-go="overview">Overview</a><a href="#trade" data-go="trade">Trade</a><a href="#pump" data-go="pump">Pump</a><a href="#trending" data-go="trending">Trending</a><a href="#perps" data-go="perps">Perps</a><a href="#whales" data-go="whales">Whales</a><a href="#hedge" data-go="hedge">Hedge</a><a href="#bag" data-go="bag">Bag</a><a href="#faq" data-go="faq">FAQ</a><button type="button" data-act="palette">Search ⌘K</button><button type="button" data-act="alerts">Price alerts</button><button type="button" data-act="settings">Settings</button><button type="button" data-act="vault">Home screen</button></div>
+
+<main id="top">
+  <!-- overview: the dashboard you land on -->
+  <section class="page" data-page="overview" hidden>
+    <div class="wrap wide">
+      <div class="ov">
+        <div class="ovc ov-hero">
+          <p class="eyebrow mono">GTA VI · 19 November 2026</p>
+          <h2 class="ov-h">Vice City opens in</h2>
+          <div class="cd" id="cd"><div><b data-u="d">0</b><span>days</span></div><div><b data-u="h">00</b><span>hours</span></div><div><b data-u="m">00</b><span>minutes</span></div><div><b data-u="s">00</b><span>seconds</span></div></div>
+          <p class="ov-sub">Stack your bux before the city opens. Trade the memes, hedge the bags, follow the whales.</p>
+          <div class="ov-cta"><a class="btn btn-g" href="#trade" data-go="trade">Open the terminal</a><a class="btn btn-line" href="#pump" data-go="pump">⚡ Fresh launches</a></div>
+        </div>
+        <div class="ovc ov-mood">
+          <div class="ovc-h"><b>Meme market mood</b><span class="live-pill mono sm"><i></i>live</span></div>
+          <div class="gauge"><svg viewBox="0 0 220 128" aria-hidden="true"><defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#ff4d7d"/><stop offset=".5" stop-color="#ffd23f"/><stop offset="1" stop-color="#2ee6a6"/></linearGradient></defs>
+            <path d="M20 112a90 90 0 0 1 180 0" fill="none" stroke="rgba(190,170,255,.12)" stroke-width="16" stroke-linecap="round"/><path d="M20 112a90 90 0 0 1 180 0" fill="none" stroke="url(#gg)" stroke-width="16" stroke-linecap="round" stroke-dasharray="3 6"/>
+            <g id="gNeedle" style="transform-origin:110px 112px;transform:rotate(-90deg)"><path d="M110 112 106 108 110 34 114 108z" fill="#f5f1ff"/><circle cx="110" cy="112" r="8" fill="#f5f1ff"/><circle cx="110" cy="112" r="3.5" fill="#0a0720"/></g></svg>
+            <div class="g-v"><b id="moodV">—</b><span id="moodL">reading the market</span></div></div>
+          <div class="kv3 mono"><div><span>Up 24h</span><b id="moodUp">—</b></div><div><span>Down 24h</span><b id="moodDn">—</b></div><div><span>Avg funding</span><b id="moodF">—</b></div></div>
+        </div>
+        <div class="ov-kpis" id="ovKpi"></div>
+        <div class="ovc ov-c"><div class="ovc-h"><b>Top movers</b><div class="seg seg-xs" id="mvTab"><button data-m="up" type="button" class="on">Gainers</button><button data-m="dn" type="button">Losers</button></div></div><div class="mv" id="ovMovers"></div></div>
+        <div class="ovc ov-c"><div class="ovc-h"><b>Fresh on pump.fun</b><span class="live-pill mono sm"><i></i>live</span></div><div class="fr" id="ovFresh"><div class="sk"></div><div class="sk"></div><div class="sk"></div></div></div>
+        <div class="ovc ov-c"><div class="ovc-h"><b>Who's paying funding</b><span class="mono muted">APR, live</span></div><div class="fu-l" id="ovFund"></div></div>
+        <div class="ovc ov-w"><div class="ovc-h"><b>Trending now</b><a class="mono" href="#trending" data-go="trending">all trending →</a></div><div class="tr-strip" id="ovTrend"></div></div>
+        <div class="ovc ov-c"><div class="ovc-h"><b>Whale radar</b><a class="mono" href="#whales" data-go="whales">leaderboard →</a></div><div class="wr" id="ovWhales"><div class="sk"></div><div class="sk"></div></div></div>
+        <div class="ovc ov-c ov-bag" id="ovBag"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page app" id="terminal" data-page="trade">
+    <div class="app-w">
+      <div class="tick-row"><button class="ca-chip mono" id="caChip" type="button" hidden title="Copy the $BUX contract address"><img src="/favicon-64.png?v=1" alt="" width="18" height="18"><b>$BUX</b><span id="caChipTxt"></span><em>copy CA</em></button><div class="tickers mono" id="tickers"></div></div>
+      <div class="term" id="term">
+        <div class="term-top">
+          <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="text" placeholder="Search a memecoin or paste a mint" autocomplete="off" spellcheck="false"></label>
+          <div class="results" id="results" hidden></div>
+          <div class="term-w mono" id="termWallets"></div>
+        </div>
+        <div class="term-grid">
+          <aside class="t-list">
+            <div class="t-list-h mono"><div class="seg seg-xs" id="listTab"><button data-l="trend" type="button" class="on">Hot</button><button data-l="new" type="button">New</button><button data-l="top" type="button">Top</button><button data-l="perps" type="button">Perps</button><button data-l="watch" type="button" aria-label="Watchlist">★</button></div><div class="seg seg-xs" id="trendTf"><button data-tf="5m" type="button">5m</button><button data-tf="1h" type="button" class="on">1h</button><button data-tf="6h" type="button">6h</button><button data-tf="24h" type="button">24h</button></div></div>
+            <div class="t-rows" id="trendRows"><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>
+          </aside>
+          <div class="t-main">
+            <div class="tok" id="tok"><div class="tok-id"><span class="tok-ic" id="tokIc"></span><div><b id="tokSym">—</b><span id="tokName">loading</span></div><button class="star" id="tokStar" type="button" aria-label="Watch this coin" title="Watchlist (W)">☆</button><span class="tok-acts"><button class="ta mono" id="tokCopy" type="button" title="Copy the mint address">CA</button><button class="ta" id="tokBell" type="button" title="Price alert (L)" aria-label="Price alert"><svg viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></button><button class="ta" id="tokShare" type="button" title="Copy a link to this coin" aria-label="Share"><svg viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.6 0l3-3a4 4 0 0 0-5.6-5.6l-1 1"/><path d="M14 10a4 4 0 0 0-5.6 0l-3 3a4 4 0 0 0 5.6 5.6l1-1"/></svg></button></span><div class="socials" id="tokSoc"></div></div><div class="tok-px"><b id="tokPx">—</b><em id="tokCh">—</em></div></div>
+            <div class="tok-stats mono" id="tokStats"></div>
+            <div class="pulse mono" id="pulse"></div>
+            <div class="chart-h"><div class="chart-tools"><div class="seg seg-xs" id="chartTf"><button data-tf="5m" type="button">5m</button><button data-tf="15m" type="button" class="on">15m</button><button data-tf="1h" type="button">1h</button><button data-tf="4h" type="button">4h</button><button data-tf="1d" type="button">1D</button></div><div class="seg seg-xs" id="chartOv"><button data-o="ema" type="button">EMA 20/50</button><button data-o="sol" type="button">vs SOL</button></div></div><span class="mono muted" id="chartSrc"></span></div>
+            <div class="chart" id="chart"><canvas id="chartCv"></canvas><div class="chart-tip mono" id="chartTip" hidden></div><div class="chart-empty mono" id="chartEmpty" hidden></div></div>
+            <div class="under"><div class="under-h"><div class="seg seg-xs" id="underTab"><button data-u="trades" type="button" class="on">Trades</button><button data-u="info" type="button">Info</button><button data-u="perp" type="button">Perp</button></div><div class="seg seg-xs" id="trF"><button data-f="all" type="button" class="on">All</button><button data-f="buy" type="button">Buys</button><button data-f="sell" type="button">Sells</button><button data-f="whale" type="button">Whales</button></div><span class="mono muted" id="underNote"></span></div><div class="under-b mono" id="underB"><p class="empty">Loading trades…</p></div></div>
+          </div>
+          <div class="t-side">
+            <div class="seg tabs" id="sideTabs"><button data-t="ape" type="button" class="on"><img src="https://www.google.com/s2/favicons?domain=jup.ag&amp;sz=64" alt="">Ape</button><button data-t="hedge" type="button"><img src="https://www.google.com/s2/favicons?domain=hyperliquid.xyz&amp;sz=64" alt="">Hedge</button><button data-t="perps" type="button"><img src="https://www.google.com/s2/favicons?domain=hyperliquid.xyz&amp;sz=64" alt="">Perps</button></div>
+            <!-- ape -->
+            <div class="pane" id="paneApe">
+              <div class="seg seg-sm" id="apeSide"><button data-s="buy" type="button" class="on">Buy</button><button data-s="sell" type="button">Sell</button></div>
+              <div class="seg seg-sm" id="apeType"><button data-t="market" type="button" class="on">Market</button><button data-t="limit" type="button">Limit</button></div>
+              <label class="fld"><span id="apeLbl">You pay (SOL)</span><input id="apeAmt" type="text" inputmode="decimal" value="0.5"></label>
+              <div class="chips" id="apeChips"></div>
+              <div id="apeLimWrap" hidden><label class="fld"><span id="apeLimLbl">Buy when the price drops to (USD)</span><input id="apeLim" type="text" inputmode="decimal"></label><div class="chips" id="apeLimChips"></div><p class="hint mono" id="apeLimHint"></p></div>
+              <div class="quote mono" id="apeQuote"><div><span>You get</span><b>—</b></div><div><span>Price impact</span><b>—</b></div><div><span>Route</span><b>—</b></div></div>
+              <button class="btn btn-g btn-block" id="apeGo" type="button">Connect a Solana wallet</button>
+              <div class="via mono"><img src="https://www.google.com/s2/favicons?domain=jup.ag&amp;sz=64" alt="" width="16" height="16">Jupiter<span id="apeVia">best route</span></div>
+              <div class="lims" id="apeLims" hidden><div class="lims-h mono"><span>Your limit orders</span><em id="limN"></em></div><div id="limRows"></div></div>
+            </div>
+            <!-- hedge -->
+            <div class="pane" id="paneHedge" hidden>
+              <label class="fld"><span>Hedge with</span><select id="hgPerp"></select></label>
+              <p class="hint mono" id="hgHint"></p>
+              <div class="beta mono" id="hgBeta"><span>Reading how this coin moves with the market…</span></div>
+              <label class="fld"><span>Bag to hedge (USD)</span><input id="hgBag" type="text" inputmode="decimal" value="500"></label>
+              <div class="slide"><div class="slide-h mono"><span>Hedge</span><b id="hgPctV">50%</b></div><input id="hgPct" type="range" min="0" max="200" step="5" value="50"></div>
+              <div class="seg seg-sm" id="hgLev"></div>
+              <div class="quote mono" id="hgOut"></div>
+              <button class="btn btn-r btn-block" id="hgGo" type="button">Connect for Hyperliquid</button>
+              <div class="via mono"><img src="https://www.google.com/s2/favicons?domain=hyperliquid.xyz&amp;sz=64" alt="" width="16" height="16">Hyperliquid<span>one approval</span></div>
+            </div>
+            <!-- perps -->
+            <div class="pane" id="panePerps" hidden>
+              <label class="fld"><span>Perp</span><select id="pxPerp"></select></label>
+              <div class="seg seg-sm" id="pxSide"><button data-s="long" type="button" class="on">Long</button><button data-s="short" type="button">Short</button></div>
+              <div class="seg seg-sm" id="pxType"><button data-t="market" type="button" class="on">Market</button><button data-t="limit" type="button">Limit</button></div>
+              <label class="fld" id="pxPxWrap" hidden><span>Limit price (USD)</span><input id="pxPx" type="text" inputmode="decimal"></label>
+              <label class="fld"><span>Size (USD)</span><input id="pxSize" type="text" inputmode="decimal" value="100"></label>
+              <div class="seg seg-sm" id="pxLev"></div>
+              <div class="quote mono" id="pxOut"></div>
+              <button class="btn btn-g btn-block" id="pxGo" type="button">Connect for Hyperliquid</button>
+              <div class="via mono"><img src="https://www.google.com/s2/favicons?domain=hyperliquid.xyz&amp;sz=64" alt="" width="16" height="16">Hyperliquid<span>3% max slippage</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="desk">
+          <div class="desk-c"><div class="desk-h mono"><span>Your bag</span><em id="bagTot">—</em></div><div class="desk-rows" id="bagRows"><p class="empty mono">Connect a Solana wallet to see your bag.</p></div></div>
+          <div class="desk-c"><div class="desk-h mono"><span>Your positions</span><em id="hlTot">—</em></div><div class="desk-acts"><button type="button" id="closeAll">Close all</button><button type="button" id="cancelAll">Cancel all orders</button><button type="button" id="refreshHL">Refresh</button></div><div class="desk-rows" id="hlRows"><p class="empty mono">Connect for Hyperliquid to see your positions.</p></div><div class="desk-h mono" style="margin-top:12px"><span>Open orders</span><em id="ooN"></em></div><div class="desk-rows" id="ooRows"><p class="empty mono">—</p></div><div class="desk-h mono" style="margin-top:12px"><span>Recent fills</span></div><div class="desk-rows" id="fillRows"><p class="empty mono">—</p></div></div>
+          <div class="desk-c desk-net"><div class="desk-h mono"><span>Net</span><em id="netV">—</em></div><div class="net-bar"><i id="netBag"></i><i id="netShort"></i></div><div class="net-l mono"><span><i class="sw g"></i>bag <b id="netBagV">—</b></span><span><i class="sw r"></i>short <b id="netShortV">—</b></span></div><p class="mono muted" id="netNote">Hedged share of your bag.</p><button class="btn btn-r btn-sm" id="hedgeAll" type="button" style="margin-top:12px">Hedge the whole bag with SOL</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- pump.fun, live -->
+  <section class="page" data-page="pump" hidden>
+    <div class="wrap">
+      <header class="pg-h"><div><p class="eyebrow mono">Pump</p><h2 class="h2">Fresh off the curve.</h2><p class="pg-sub">Every pump.fun launch, live from Jupiter. Tap a coin to open it, ⚡ to buy in one signature.</p></div>
+        <div class="pg-tools"><span class="live-pill mono"><i></i><span id="pStat">connecting…</span></span></div></header>
+      <div class="mstats mono" id="pStats"><div><span>Launched, last 5 min</span><b id="psNew">—</b><em id="psPace">—</em></div><div><span>About to bond</span><b id="psBond">—</b><em>curve over 90%</em></div><div><span>Migrated, last hour</span><b id="psMig">—</b><em>to PumpSwap</em></div><div><span>Hottest, 5 min</span><b id="psHot">—</b><em id="psHotV">—</em></div></div>
+      <div class="p-bar"><label class="search sm"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="pq" type="text" placeholder="Filter by name, or paste a mint" autocomplete="off" spellcheck="false"></label>
+        <div class="seg seg-sm" id="pQb" title="Quick buy amount"></div><div class="seg seg-sm p-cols" id="pCol"></div></div>
+      <div class="pcols" id="pcols"></div>
+    </div>
+  </section>
+
+  <!-- trending -->
+  <section class="page" data-page="trending" hidden>
+    <div class="wrap">
+      <header class="pg-h"><div><p class="eyebrow mono">Trending</p><h2 class="h2">What the trenches are aping.</h2><p class="pg-sub">Jupiter's trending Solana memecoins. Tap a card to trade it.</p></div>
+        <div class="seg seg-sm" id="memeTf"><button data-tf="5m" type="button">5m</button><button data-tf="1h" type="button" class="on">1h</button><button data-tf="6h" type="button">6h</button><button data-tf="24h" type="button">24h</button></div></header>
+      <div class="mstats mono" id="tStats"><div><span>Volume</span><b id="tsVol">—</b><em id="tsTf">—</em></div><div><span>Buy pressure</span><b id="tsBuy">—</b><em>share of volume that bought</em></div><div><span>Top gainer</span><b id="tsTop">—</b><em id="tsTopV">—</em></div><div><span>Average move</span><b id="tsAvg">—</b><em id="tsUp">—</em></div></div>
+      <div class="cards" id="memeCards"><div class="sk card-sk"></div><div class="sk card-sk"></div><div class="sk card-sk"></div><div class="sk card-sk"></div></div>
+    </div>
+  </section>
+
+  <!-- perps: the board and the map -->
+  <section class="page" data-page="perps" hidden>
+    <div class="wrap">
+      <header class="pg-h"><div><p class="eyebrow mono">Perps</p><h2 class="h2">Everything you can long or short.</h2><p class="pg-sub">Hyperliquid perps, live. Funding is paid every hour. Tap Long, Short or Hedge to open it in the terminal.</p></div>
+        <div class="pg-tools"><div class="seg seg-sm" id="perpView"><button data-v="board" type="button" class="on">Board</button><button data-v="map" type="button">Map</button></div><div class="seg seg-sm" id="perpSet"><button data-set="memes" type="button" class="on">Memes</button><button data-set="all" type="button">All perps</button></div></div></header>
+      <div class="mstats mono" id="mstats">
+        <div><span>Meme perps</span><b id="msN">—</b><em id="msUD">—</em></div>
+        <div><span>Open interest</span><b id="msOI">—</b><em>on Hyperliquid</em></div>
+        <div><span>Volume 24h</span><b id="msVol">—</b><em id="msTop">—</em></div>
+        <div><span>Avg funding</span><b id="msFund">—</b><em>APR, OI-weighted</em></div>
+      </div>
+      <div id="pvBoard"><div class="tbl-wrap"><table class="tbl mono" id="perpTbl"><thead><tr><th data-k="name">Perp</th><th data-k="mark">Mark</th><th data-k="chg">24h</th><th data-k="fund">Funding 1h</th><th data-k="apr">APR</th><th data-k="oi">Open interest</th><th data-k="vol">Volume 24h</th><th data-k="lev">Max</th><th></th></tr></thead><tbody id="perpRows"><tr><td colspan="9" class="muted">Reading Hyperliquid…</td></tr></tbody></table></div></div>
+      <div id="pvMap" hidden><div class="heat-h mono"><div class="seg seg-xs" id="heatBy"><button data-b="oi" type="button" class="on">Size by open interest</button><button data-b="vol" type="button">Size by volume</button></div><span class="muted">colour is the 24h move · tap a tile to trade it</span></div><div class="heat" id="heat"></div></div>
+    </div>
+  </section>
+
+  <!-- whales: Hyperliquid's top traders and any Solana wallet -->
+  <section class="page" data-page="whales" hidden>
+    <div class="wrap">
+      <header class="pg-h"><div><p class="eyebrow mono">Whales</p><h2 class="h2">Follow the money.</h2><p class="pg-sub">Hyperliquid's top traders, ranked live from the public leaderboard, and any Solana wallet you want to watch. Tap a trader to see what they hold right now, then copy or fade it.</p></div>
+        <div class="seg seg-sm" id="whTab"><button data-t="hl" type="button" class="on">Top traders</button><button data-t="sol" type="button">Watch a wallet</button></div></header>
+      <div id="whHL">
+        <div class="mstats mono" id="wStats"><div><span>Top 100 PnL</span><b id="wsPnl">—</b><em id="wsWin">—</em></div><div><span>Average ROI</span><b id="wsRoi">—</b><em>top 100</em></div><div><span>Biggest winner</span><b id="wsTop">—</b><em id="wsTopV">—</em></div><div><span>Traders ranked</span><b id="wsN">—</b><em>public leaderboard</em></div></div>
+        <div class="p-bar"><div class="seg seg-sm" id="whWin"><button data-w="day" type="button">24h</button><button data-w="week" type="button">7d</button><button data-w="month" type="button" class="on">30d</button><button data-w="allTime" type="button">All time</button></div>
+          <div class="seg seg-sm" id="whSort"><button data-s="pnl" type="button" class="on">PnL</button><button data-s="roi" type="button">ROI</button><button data-s="vlm" type="button">Volume</button></div>
+          <label class="search sm"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="whQ" type="text" placeholder="Find a trader by name or 0x address" autocomplete="off" spellcheck="false"></label>
+          <span class="mono muted small" id="whNote"></span></div>
+        <div class="tbl-wrap"><table class="tbl mono wh" id="whTbl"><thead><tr><th>#</th><th>Trader</th><th>Account</th><th>PnL</th><th>ROI</th><th>Volume</th><th></th></tr></thead><tbody id="whRows"><tr><td colspan="7" class="muted">Reading the Hyperliquid leaderboard…</td></tr></tbody></table></div>
+      </div>
+      <div id="whSOL" hidden>
+        <div class="p-bar"><label class="search sm so"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="soQ" type="text" placeholder="Paste any Solana wallet address" autocomplete="off" spellcheck="false"></label><button class="btn btn-sm btn-line" id="soMine" type="button">My wallet</button><button class="btn btn-sm btn-g" id="soGo" type="button">Watch</button></div>
+        <div id="soOut"><p class="empty mono">Paste a wallet to see everything it holds, priced live. Nothing is signed and nothing is stored.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- hedge -->
+  <section class="page" data-page="hedge" hidden>
+    <div class="wrap">
+      <header class="pg-h"><div><p class="eyebrow mono">Hedge</p><h2 class="h2">Keep the bag. Lose the risk.</h2><p class="pg-sub">A short on Hyperliquid pays you back when the market drags your memes down.</p></div></header>
+      <div class="hedge">
+        <div class="hedge-l">
+          <ol class="beats" id="beats">
+            <li class="on"><b>Buy the meme.</b><span>Your bag rides every pump and every dump.</span></li>
+            <li><b>Short the perp.</b><span>A short on Hyperliquid gains when the market falls.</span></li>
+            <li><b>Keep the net.</b><span>What's left is the coin beating the market. Or not.</span></li>
+          </ol>
+          <p class="mono muted small" id="hedgeCap">Real prices from Hyperliquid, last 7 days.</p>
+        </div>
+        <div class="hchart"><canvas id="hedgeCv"></canvas><div class="hlegend mono" id="hedgeLeg"></div></div>
+      </div>
+      <h3 class="h3">Size it before you click.</h3>
+      <div class="calc">
+        <div class="calc-in">
+          <label class="fld"><span>Bag (USD)</span><input id="cBag" type="text" inputmode="decimal" value="1000"></label>
+          <label class="fld"><span>Short on</span><select id="cPerp"></select></label>
+          <div class="slide"><div class="slide-h mono"><span>Hedge</span><b id="cPctV">60%</b></div><input id="cPct" type="range" min="0" max="100" step="5" value="60"></div>
+          <div class="slide"><div class="slide-h mono"><span>Leverage</span><b id="cLevV">3x</b></div><input id="cLev" type="range" min="1" max="10" step="1" value="3"></div>
+          <div class="slide"><div class="slide-h mono"><span>Your coin moves</span><b id="cCoinV">-40%</b></div><input id="cCoin" type="range" min="-90" max="300" step="5" value="-40"></div>
+          <div class="slide"><div class="slide-h mono"><span>The perp moves</span><b id="cPerpV">-15%</b></div><input id="cPerpMv" type="range" min="-60" max="100" step="1" value="-15"></div>
+        </div>
+        <div class="calc-out">
+          <div class="big3"><div><span class="mono">Bag</span><b id="oBag">—</b></div><div><span class="mono">Short</span><b id="oShort">—</b></div><div class="net"><span class="mono">Net</span><b id="oNet">—</b></div></div>
+          <div class="kv mono" id="oKv"></div>
+          <table class="scen mono" id="oScen"><thead><tr><th>If</th><th>Coin</th><th>Perp</th><th>Unhedged</th><th>Hedged</th></tr></thead><tbody></tbody></table>
+          <button class="btn btn-r btn-block" id="calcGo" type="button" style="margin-top:14px">Open this hedge in the terminal</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- bag -->
+  <section class="page" data-page="bag" hidden>
+    <div class="wrap">
+      <header class="pg-h"><div><p class="eyebrow mono">Bag</p><h2 class="h2">Everything you hold.</h2><p class="pg-sub">Your Solana bag and your Hyperliquid account side by side, live. Hedge a coin, close a position or cancel an order from here.</p></div>
+        <div class="pg-tools"><button class="btn btn-sm btn-ghost" id="bagConnect" type="button"><i class="dot"></i><span>Connect wallets</span></button></div></header>
+      <div class="nw mono" id="nw"><div><span>Net worth</span><b id="nwTot">—</b></div><div><span>Solana bag</span><b id="nwSol">—</b></div><div><span>Hyperliquid equity</span><b id="nwHL">—</b></div><div><span>Hedged</span><b id="nwHedge">—</b></div></div>
+      <div id="bagAlloc" hidden><div class="alloc" id="baBar"></div><div class="alloc-l mono" id="baLeg"></div></div>
+      <div class="bag-slot" id="bagSlot"></div>
+    </div>
+  </section>
+
+  <!-- faq -->
+  <section class="page" data-page="faq" hidden>
+    <div class="wrap narrow">
+      <header class="pg-h"><div><p class="eyebrow mono">FAQ</p><h2 class="h2">Questions players ask.</h2></div></header>
+      <div class="faq" id="faqList">
+        <details open><summary>What is BUX?</summary><p>The first in-game currency for GTA, and a terminal to spend it in. You trade fresh pump.fun launches and any Solana memecoin, set limit orders, hedge with perps on Hyperliquid, follow the biggest traders, set alerts and track your bag, all from one screen.</p></details>
+        <details><summary>Is BUX part of GTA, Rockstar or Take-Two?</summary><p>No. BUX is a fan-made memecoin and trading terminal. It is not affiliated with, endorsed by or connected to Rockstar Games or Take-Two Interactive. GTA is their trademark.</p></details>
+        <details><summary>Does BUX hold my money?</summary><p>No. Your SOL and coins stay in your Solana wallet and every swap is signed there. Your margin stays in your own Hyperliquid account. There is no BUX account and no deposit to us.</p></details>
+        <details><summary>How do trades work?</summary><p>Swaps go through Jupiter, which finds the best route across Solana, pump.fun curves included. You see the quote, your wallet signs once, and Jupiter sends it. Perps go straight to Hyperliquid.</p></details>
+        <details><summary>How do limit orders work?</summary><p>Pick Limit in the buy or sell box and set your price. Jupiter keeps the order onchain and fills it when the coin trades at your price, even with this tab closed. Cancel any time and the funds come back to your wallet. Jupiter's minimum is about $5 per order.</p></details>
+        <details><summary>What is the Whales page?</summary><p>The public Hyperliquid leaderboard, ranked by the window you pick, plus every open position of any trader on it. Copy or fade opens the same perp in the terminal; you choose the size and sign it yourself. You can also watch any Solana wallet, priced live. It's read-only: nothing is signed and nothing is stored.</p></details>
+        <details><summary>What is the session key?</summary><p>Hyperliquid lets you approve an "agent" key that can place and cancel orders for your account but can never withdraw. BUX creates one in your browser, your wallet approves it once, and it stays in this browser only. Forget it any time from the wallet menu.</p></details>
+        <details><summary>What does hedging actually do?</summary><p>A short gains when its price falls. If your coin and the perp fall together, the short pays back part of what the bag lost. If your coin pumps while the perp is flat, you keep most of the pump. The hedge costs you some upside and pays or earns funding.</p></details>
+        <details><summary>My coin has no perp. Can I still hedge?</summary><p>Yes, with SOL or another meme perp as a market hedge. It covers the "whole market dumps" risk, not the "this coin rugs" risk. The terminal says which one you're getting.</p></details>
+        <details><summary>Which wallets work?</summary><p>For memes: any Solana wallet that supports Wallet Standard, like Phantom, Solflare or Backpack. For perps: any EVM wallet, like Phantom, MetaMask or Rabby, with USDC on Hyperliquid.</p></details>
+        <details><summary>What does it cost?</summary><p>Jupiter's swap fee and Hyperliquid's trading fee, the same as on their own sites. BUX adds nothing.</p></details>
+        <details><summary>What can go wrong?</summary><p>Memecoins can go to zero. Leverage can be liquidated if the perp pumps far enough. Funding can turn against a short. A market hedge can fall less than your coin. Only trade what you can lose.</p></details>
+      </div>
+      <div class="ca" id="caBox" hidden><span class="mono" id="caTxt"></span><button class="btn btn-sm btn-line" id="caCopy" type="button">Copy CA</button><a class="btn btn-sm btn-line" id="caBuy" target="_blank" rel="noopener">pump.fun</a><a class="btn btn-sm btn-line" id="caChart" target="_blank" rel="noopener">Chart</a></div>
+    </div>
+  </section>
+</main>
+<nav id="tabbar" aria-label="Sections"><a href="#overview" data-go="overview"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg><span>Overview</span></a><a href="#trade" data-go="trade"><svg viewBox="0 0 24 24"><path d="M7 3v4M7 17v4M17 6v3M17 15v4"/><rect x="4.5" y="7" width="5" height="10" rx="1.2"/><rect x="14.5" y="9" width="5" height="6" rx="1.2"/></svg><span>Trade</span></a><a href="#pump" data-go="pump"><svg viewBox="0 0 24 24"><path d="M13.2 2.5 5 13.6h5.6l-1 7.9 8.4-11.3h-5.7z"/></svg><span>Pump</span></a><a href="#whales" data-go="whales"><svg viewBox="0 0 24 24"><path d="M3 13c0 4 3.5 6 8 6 6 0 9.5-3.5 9.5-8.5 0-1.7-.6-3-1.5-3.8M3 13c2.3 0 3.5-1 4.5-2.5M3 13c.3-2.3 1.8-4.5 4.5-5.5"/><path d="M19 6.7 21.5 4M19 6.7 17 4.2"/><circle cx="8.5" cy="14" r=".9"/></svg><span>Whales</span></a><a href="#bag" data-go="bag"><svg viewBox="0 0 24 24"><rect x="3.5" y="6.5" width="17" height="13" rx="3"/><path d="M8.5 6.5V5.5a3.5 3.5 0 0 1 7 0v1M15.5 13h2"/></svg><span>Bag</span></a><button type="button" id="tabMore"><svg viewBox="0 0 24 24"><circle cx="5.5" cy="12" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="18.5" cy="12" r="1.4"/></svg><span>More</span></button></nav>
+<div class="tape" id="tape" aria-label="Live meme perps on Hyperliquid"><div class="tape-in" id="tapeIn"></div></div>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-in" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="modal-h"><b id="mTitle">Connect</b><button class="x" id="mClose" type="button" aria-label="Close">×</button></div>
+    <div class="modal-b" id="mBody"></div>
+  </div>
+</div>
+<div class="pal" id="pal" hidden><div class="pal-in" role="dialog" aria-modal="true" aria-label="Search and commands"><label class="pal-q"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4-4"/></svg><input id="palQ" type="text" placeholder="Search a coin, or type a command" autocomplete="off" spellcheck="false"><span class="kbd">esc</span></label><div class="pal-list" id="palList"></div></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+<button class="fs-x mono" id="fsX" type="button">Exit full screen <span class="kbd">Esc</span></button>
+<script type="module" src="/main.js?v=1"></script>
+</body>
+</html>
