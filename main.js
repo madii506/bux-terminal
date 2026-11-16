@@ -1,4 +1,4 @@
-// BUX · boot: the home (the club skyline under the BUX header: enter or connect), the page router, the wallet modal, the palette, live data
+// BUX · boot: the home (the night city with BUX in the middle: enter or connect), the page router, the wallet modal, the palette, live data
 import { $, $$, on, esc, store, short, toast, CONFIG, copy, px, usd, icon, brand, reduced } from './core.js';
 import * as api from './api.js';
 import * as W from './wallet.js';
@@ -33,19 +33,19 @@ document.addEventListener('click', e => {
 });
 addEventListener('hashchange', () => { const p = location.hash.slice(1); if ((PAGES.includes(p) || p === 'market') && !html.classList.contains('home')) go(p, { push: false }); });
 
-// ---------------------------------------------------------------- home: the club skyline
+// ---------------------------------------------------------------- home: the night city
 let club = null, entering = false, booted = false;
 const startPage = () => { const h = location.hash.slice(1); return PAGES.includes(h) ? h : new URLSearchParams(location.search).has('t') ? 'trade' : 'overview'; };
 async function makeHome() {
   if (club) { club.pause(false); club.reset(); introEnds(1300); return; }
   try {
     await Promise.race([document.fonts.load('40px Anton'), new Promise(r => setTimeout(r, 1200))]);
-    const m = await import('./club.js?v=1');
-    club = m.startClub($('#city'), { reduced: reduced(), header: $('#homeTitle') });
-    introEnds(reduced() ? 0 : 4300);
+    const m = await import('./city.js?v=1');
+    club = m.startCity($('#city'), { reduced: reduced(), header: $('#homeTitle') });
+    introEnds(reduced() ? 0 : 4700);
   } catch (e) { console.error(e); introEnds(0); }
 }
-// the intro plays once: the city powers up, the beams switch on, the beat drops on the header; any tap skips to the drop
+// the intro plays once: the camera comes down out of the sky into its circle round downtown; any tap skips it
 let introT = 0;
 function introEnds(ms) { clearTimeout(introT); html.classList.remove('intro-done'); introT = setTimeout(() => html.classList.add('intro-done'), ms); }
 function skipIntro() { if (html.classList.contains('intro-done') || !html.classList.contains('home')) return; if (club) club.skip(); clearTimeout(introT); setTimeout(() => html.classList.add('intro-done'), 600); }
@@ -174,7 +174,7 @@ const ACTIONS = [
   ['Settings', ',', 'slippage, leverage, start screen', tools.settings],
   ['Keyboard shortcuts', '?', 'every key the terminal knows', () => T.openKeys()],
   ...(CONFIG.ca ? [['Copy the $BUX CA', '$', short(CONFIG.ca), () => copy(CONFIG.ca)], ['Buy $BUX on pump.fun', '↗', 'opens pump.fun', () => window.open('https://pump.fun/coin/' + CONFIG.ca, '_blank', 'noopener')]] : []),
-  ['Home screen', '◎', 'the club skyline', () => home()],
+  ['Home screen', '◎', 'the night city', () => home()],
   ['FAQ', '?', 'questions players ask', () => go('faq')],
 ];
 let palSel = 0, palItems = [], palSeq = 0;
