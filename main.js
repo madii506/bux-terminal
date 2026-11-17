@@ -2,7 +2,8 @@
 import { $, $$, on, esc, store, short, toast, CONFIG, copy, px, usd, icon, brand, reduced } from './core.js';
 import * as api from './api.js';
 import * as W from './wallet.js';
-import * as T from './tools.js';
+import * as T from './tools.js?v=2';
+if (!CONFIG.ca) CONFIG.ca = '3df3pia3hZsrbBEhCdAWdzt3U8HwvAUZJoKcwYxxpump';   // same as core.js; covers a cached copy of core.js
 
 const html = document.documentElement;
 const PAGES = ['overview', 'trade', 'pump', 'trending', 'perps', 'whales', 'hedge', 'bag', 'faq'];
@@ -83,6 +84,7 @@ addEventListener('scroll', () => $('#nav').classList.toggle('solid', scrollY > 8
 if (CONFIG.x) { const x = $('#navX'); x.hidden = false; x.href = /^https?:/.test(CONFIG.x) ? CONFIG.x : 'https://x.com/' + CONFIG.x.replace(/^@/, ''); }
 if (CONFIG.ca) {
   $('#caBox').hidden = false; $('#caTxt').textContent = CONFIG.ca; $('#caCopy').onclick = () => copy(CONFIG.ca);
+  const nc = $('#navCa'); if (nc) { nc.hidden = false; $('#navCaL').textContent = CONFIG.ca; $('#navCaS').textContent = short(CONFIG.ca); nc.onclick = () => copy(CONFIG.ca); }
   const cc = $('#caChip'); if (cc) { cc.hidden = false; $('#caChipTxt').textContent = short(CONFIG.ca); cc.onclick = () => copy(CONFIG.ca); }
   $('#caBuy').href = 'https://pump.fun/coin/' + CONFIG.ca; $('#caChart').href = 'https://dexscreener.com/solana/' + CONFIG.ca;
 }

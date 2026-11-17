@@ -1023,3 +1023,16 @@ html.fs #rail{display:none}html.fs #app{padding-left:0}
   #nav{grid-template-columns:minmax(0,1fr) auto auto}
   .nav-title{order:0}#navK{order:1;display:flex!important}.nav-r{order:2}
 }
+
+/* CA chip in the nav (replaces the funding clock) */
+.nav-ca{flex:none;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 11px 0 7px;border:1px solid rgba(255,42,143,.55);border-radius:10px;background:var(--p1);color:var(--mute);font-size:12px;white-space:nowrap;cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.nav-ca img{width:20px;height:20px;border-radius:50%}
+.nav-ca span{color:var(--pk);font-weight:700;letter-spacing:.06em}
+.nav-ca b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.nav-ca svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav-ca:hover{border-color:var(--pk);color:var(--ink);background:var(--p2)}
+.nav-ca .ca-s{display:none}
+.nav-ca[hidden],.ca-chip[hidden]{display:none}
+@media (max-width:1439px){.nav-ca .ca-l{display:none}.nav-ca .ca-s{display:inline}}
+@media (max-width:620px){.nav-ca{gap:6px;padding:0 9px 0 6px}.nav-ca svg{display:none}}
+@media (max-width:380px){.nav-ca span{display:none}}

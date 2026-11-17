@@ -8,9 +8,12 @@ export const getSet = () => ({ slip: .03, lev: 3, intro: true, compact: false, .
 
 export function init() {
   // funding: Hyperliquid settles every hour on the hour
-  const fund = () => { const now = new Date(), s = 3600 - (now.getUTCMinutes() * 60 + now.getUTCSeconds()); $('#navFund b').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
-  fund(); setInterval(fund, 1000);
-  $('#navFund').onclick = () => { scrollTo('#perps', { offset: -10 }); };
+  const nf = $('#navFund');
+  if (nf) {
+    const fund = () => { const now = new Date(), s = 3600 - (now.getUTCMinutes() * 60 + now.getUTCSeconds()); nf.querySelector('b').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
+    fund(); setInterval(fund, 1000);
+    nf.onclick = () => { scrollTo('#perps', { offset: -10 }); };
+  }
   $('#navAlerts').onclick = openAlerts;
   $('#navSet').onclick = openSettings;
   $('#navKeys').onclick = openKeys;

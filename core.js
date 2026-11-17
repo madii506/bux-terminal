@@ -1,5 +1,5 @@
 // BUX · shared helpers
-export const CONFIG = { ca: '', x: '' };          // set once the coin is live: ca = mint, x = handle or url
+export const CONFIG = { ca: '3df3pia3hZsrbBEhCdAWdzt3U8HwvAUZJoKcwYxxpump', x: '' };          // set once the coin is live: ca = mint, x = handle or url
 
 const BUS = new Map();
 export const on = (e, f) => { (BUS.get(e) || BUS.set(e, []).get(e)).push(f); };
